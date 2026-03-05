@@ -5,6 +5,7 @@ from pydantic import BaseModel, field_validator
 
 
 class EmployeeCreate(BaseModel):
+    department_id: int
     full_name: str
     position: str
     hired_at: Optional[date] = None

@@ -6,18 +6,17 @@ from fastapi import HTTPException
 
 def create_employee(
         session: Session,
-        department_id: int,
         data: EmployeeCreate,
 ) -> Employee:
-    dept = session.get(Department, department_id)
+    dept = session.get(Department, data.department_id)
     if not dept:
         raise HTTPException(status_code=404, detail="Подразделение не найдено")
 
     employee = Employee(
-        department_id = department_id,
-        full_name = data.full_name,
-        position = data.position,
-        hired_at = data.hired_at,
+        department_id=data.department_id,
+        full_name=data.full_name,
+        position=data.position,
+        hired_at=data.hired_at,
     )
     session.add(employee)
     session.commit()
